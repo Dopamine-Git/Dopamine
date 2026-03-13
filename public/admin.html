@@ -1795,10 +1795,23 @@ function renderFeaturedPanel(){
   }).join('');
 }
 
-function selectFeatured(id){
-  const prods = loadProducts() || [];
+async function selectFeatured(id){
+  const prods = _productsCache || [];
   const p = prods.find(x => x.id === id);
   if(!p) return;
+
+  // Save to API so main website can read it
+  try {
+    const res = await fetch(`${API}/api/featured`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({id, name: p.name, subtitle: p.subtitle, image: p.image, emoji: p.emoji, price: p.price, size: p.size})
+    });
+    if(!res.ok) throw new Error('API error');
+  } catch(e) {
+    toast('✗ Failed to save featured product', 'err');
+    return;
+  }
 
   setFeaturedId(id);
 

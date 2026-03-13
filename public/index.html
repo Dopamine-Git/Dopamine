@@ -2589,9 +2589,20 @@ let products = [];
 
 async function bootProducts() {
   try {
-    const res = await fetchWithTimeout(`${API}/api/products`, 10000);
-    if(res.ok){
-      const data = await res.json();
+    // Load products and featured in parallel
+    const [prodRes, featRes] = await Promise.all([
+      fetchWithTimeout(`${API}/api/products`, 10000),
+      fetchWithTimeout(`${API}/api/featured`, 10000).catch(()=>null)
+    ]);
+
+    // Set featured product ID
+    if(featRes && featRes.ok){
+      const featData = await featRes.json();
+      if(featData && featData.id) window._featuredProductId = featData.id;
+    }
+
+    if(prodRes.ok){
+      const data = await prodRes.json();
       if(Array.isArray(data) && data.length > 0){
         products = data.filter(p => p.status === 'live');
         buildCarousel();
@@ -3092,7 +3103,9 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 // ── FEATURED ───────────────────────────────────────────
 function renderFeatured(){
   const allProducts=products.filter(p=>p.status==='live');
-  const p=allProducts[0];
+  // Use featured product from API if set, otherwise first product
+  const featId = window._featuredProductId;
+  const p = (featId && allProducts.find(x=>x.id===featId)) || allProducts[0];
   if(!p) return;
 
   const wrap=document.getElementById('featured-visual-wrap');
