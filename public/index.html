@@ -102,6 +102,9 @@
   --theme-transition: background .35s ease, color .35s ease, border-color .35s ease;
 }
 
+.story-sig-logo{height:64px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:0.85;transition:filter .35s ease;}
+[data-theme="light"] .story-sig-logo{filter:brightness(0);opacity:0.75;}
+
 [data-theme="light"] {
   --noir:      #F8F5F0;
   --ombre:     #EDE8E0;
@@ -2192,7 +2195,7 @@ footer{border-top:1px solid var(--border);padding:80px 80px 48px;display:grid;gr
     <!-- Signature -->
     <div class="story-sig">
       <div class="story-sig-left">
-        <img src="https://res.cloudinary.com/dgwwzzcgu/image/upload/v1773146298/logo_ix3onv.png" alt="Maison Dopaminé" style="height:48px;object-fit:contain;filter:brightness(0) invert(1);opacity:0.85;">
+        <img src="https://res.cloudinary.com/dgwwzzcgu/image/upload/v1773146298/logo_ix3onv.png" alt="Maison Dopaminé" class="story-sig-logo">
         <div class="story-maison">✦ &nbsp; Maison de Parfum</div>
       </div>
       <div class="story-sig-right">
