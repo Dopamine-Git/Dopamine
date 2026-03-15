@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Maison Dopaminé | Luxury Perfumes & Fine Fragrances</title>
 
+  <!-- ══ FAVICON ══ -->
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/dgwwzzcgu/image/upload/v1773146298/logo_ix3onv.png">
+  <link rel="apple-touch-icon" href="https://res.cloudinary.com/dgwwzzcgu/image/upload/v1773146298/logo_ix3onv.png">
+
+  <!-- ══ PRECONNECT ══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://res.cloudinary.com">
+
+  <!-- ══ SITEMAP ══ -->
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <!-- ══ HREFLANG ══ -->
+  <link rel="alternate" hreflang="en" href="https://maisondopamine.com">
+  <link rel="alternate" hreflang="en-IN" href="https://maisondopamine.com">
+  <link rel="alternate" hreflang="en-IE" href="https://maisondopamine.com">
+  <link rel="alternate" hreflang="x-default" href="https://maisondopamine.com">
+
   <!-- ══ PRIMARY META ══ -->
   <meta name="description" content="Maison Dopaminé — a luxury house of fine fragrances crafted for the bold, the elegant, and the unforgettable. Discover our collection of Eau de Parfum.">
   <meta name="keywords" content="luxury perfume, fine fragrance, eau de parfum, niche perfume, luxury fragrance house, designer perfume, maison dopamine, dopamine perfume, premium perfume India">
@@ -52,6 +70,19 @@
   }
   </script>
 
+  <!-- ══ STRUCTURED DATA — Breadcrumb ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://maisondopamine.com"},
+      {"@type": "ListItem", "position": 2, "name": "Fragrances", "item": "https://maisondopamine.com/#scents"},
+      {"@type": "ListItem", "position": 3, "name": "Our Story", "item": "https://maisondopamine.com/#story"}
+    ]
+  }
+  </script>
+
   <!-- ══ STRUCTURED DATA — Website Search ══ -->
   <script type="application/ld+json">
   {
@@ -67,12 +98,11 @@
   }
   </script>
 <script>
-  // Run before CSS paints — sets theme immediately, no flash
+  // Time-based theme — 7am–7pm = light, 7pm–7am = dark
   try {
-    document.documentElement.setAttribute(
-      'data-theme',
-      localStorage.getItem('dopamine_theme') || 'dark'
-    );
+    const _h = new Date().getHours();
+    const _theme = (_h >= 7 && _h < 19) ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', _theme);
   } catch(e) {
     document.documentElement.setAttribute('data-theme','dark');
   }
@@ -146,7 +176,7 @@ nav {
   padding:24px 48px;
   display:flex;align-items:center;justify-content:space-between;
   background:linear-gradient(to bottom,color-mix(in srgb,var(--noir) 95%,transparent),transparent);
-  transition: padding .3s, background .3s, border-color .3s;
+  transition: transform .35s cubic-bezier(.4,0,.2,1), padding .3s, background .3s, border-color .3s;
   transition: padding .3s;
 }
 nav.scrolled {
@@ -221,6 +251,7 @@ nav.scrolled {
   flex-shrink: 0;
 }
 .mob-cart-btn:hover { border-color: var(--gold); }
+nav.nav--hidden { transform: translateY(-110%); }
 .mob-cart-icon { font-size: 14px; }
 .mob-cart-badge {
   position: absolute; top: -5px; right: -5px;
@@ -373,6 +404,12 @@ nav.scrolled {
 [data-theme="dark"] .footer-brand-name img,
 [data-theme="dark"] .mm-brand img { filter: invert(1); }
 .hero-title em{font-style:italic;color:var(--champagne);}
+.pd-pillars{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px;padding-top:24px;border-top:1px solid var(--border);}
+.pd-pillar{display:flex;align-items:flex-start;gap:10px;padding:12px;background:var(--ombre);border:1px solid var(--border);}
+.pd-pillar-icon{font-size:16px;flex-shrink:0;margin-top:2px;}
+.pd-pillar-title{font-size:8px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;}
+.pd-pillar-sub{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--muted);line-height:1.5;}
+@media(max-width:480px){.pd-pillars{grid-template-columns:1fr;}}
 .hero-maison{font-size:9px;letter-spacing:10px;color:var(--muted);text-transform:uppercase;margin-top:16px;opacity:0;animation:fadeUp .8s .9s forwards;}
 @media(max-width:480px){.hero-maison{letter-spacing:4px;font-size:8px;padding:0 20px;}}
 .hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;}
@@ -1936,7 +1973,7 @@ footer{border-top:1px solid var(--border);padding:80px 80px 48px;display:grid;gr
     </button>
     <!-- Mobile cart icon -->
     <button class="mob-cart-btn" onclick="toggleCart()" aria-label="Cart">
-      <span class="mob-cart-icon">◻</span>
+      <span class="mob-cart-icon">🛍</span>
       <span class="mob-cart-badge" id="mob-cart-badge">0</span>
     </button>
     <!-- Hamburger -->
@@ -2224,9 +2261,9 @@ footer{border-top:1px solid var(--border);padding:80px 80px 48px;display:grid;gr
     <div class="contact-grid">
       <div class="contact-info">
         <div class="ci-block"><div class="ci-icon">📍</div><div class="ci-label">Address</div><div class="ci-value">dopaminé, Maison de Parfum<br>Ireland</div></div>
-        <div class="ci-block"><div class="ci-icon">✉️</div><div class="ci-label">Email</div><div class="ci-value"><a href="/cdn-cgi/l/email-protection#fd9598919192bd99928d9c90949398d39498"><span class="__cf_email__" data-cfemail="b1d9d4dddddef1d5dec1d0dcd8dfd49fd8d4">[email&#160;protected]</span></a></div></div>
+        <div class="ci-block"><div class="ci-icon">✉️</div><div class="ci-label">Email</div><div class="ci-value"><a href="mailto:hello@maisondopamine.com">hello@maisondopamine.com</a></div></div>
         <div class="ci-block"><div class="ci-icon">📞</div><div class="ci-label">Contact</div><div class="ci-value"><a href="tel:+353870381460">+353 870381460</a></div></div>
-        <div class="ci-block"><div class="ci-icon"></div><div class="ci-label">Instagram</div><div class="ci-value"><a href="https://www.instagram.com/dopamineco._" target="_blank">@dopamineco._</a></div></div>
+        <div class="ci-block"><div class="ci-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div><div class="ci-label">Instagram</div><div class="ci-value"><a href="https://www.instagram.com/dopamineco._" target="_blank">@dopamineco._</a></div></div>
       </div>
       <div>
         <div class="cf-title">Send us a message</div>
@@ -2592,18 +2629,14 @@ let products = [];
 
 async function bootProducts() {
   try {
-    // Load products and featured in parallel
     const [prodRes, featRes] = await Promise.all([
       fetchWithTimeout(`${API}/api/products`, 10000),
       fetchWithTimeout(`${API}/api/featured`, 10000).catch(()=>null)
     ]);
-
-    // Set featured product ID
     if(featRes && featRes.ok){
       const featData = await featRes.json();
       if(featData && featData.id) window._featuredProductId = featData.id;
     }
-
     if(prodRes.ok){
       const data = await prodRes.json();
       if(Array.isArray(data) && data.length > 0){
@@ -2616,8 +2649,6 @@ async function bootProducts() {
       }
     }
   } catch(e){ console.warn('API fetch failed:', e.message); }
-
-  // API unavailable — show empty state
   products = [];
   buildCarousel();
   renderFeatured();
@@ -2669,8 +2700,26 @@ function mobileCart() {
 }
 
 // ── NAV SCROLL ───────────────────────────────────────
+let _lastScrollY = 0;
+let _scrollTicking = false;
 window.addEventListener('scroll', () => {
-  document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 60);
+  if (!_scrollTicking) {
+    requestAnimationFrame(() => {
+      const nav = document.getElementById('main-nav');
+      const current = window.scrollY;
+      if (current <= 60) {
+        nav.classList.remove('nav--hidden');
+      } else if (current < _lastScrollY) {
+        nav.classList.remove('nav--hidden');
+      } else if (current > _lastScrollY + 5) {
+        nav.classList.add('nav--hidden');
+      }
+      nav.classList.toggle('scrolled', current > 60);
+      _lastScrollY = current;
+      _scrollTicking = false;
+    });
+    _scrollTicking = true;
+  }
 });
 
 // ── CART ─────────────────────────────────────────────
@@ -2766,18 +2815,18 @@ function openCheckout() {
       <div class="cm-section-title">✦ Delivery Details</div>
       <div class="cform" style="margin-bottom:28px;">
         <div class="cfield-row">
-          <div class="cfield"><div class="clabel">First Name</div><input id="co-fname" type="text" placeholder="Arjun"></div>
-          <div class="cfield"><div class="clabel">Last Name</div><input id="co-lname" type="text" placeholder="Sharma"></div>
+          <div class="cfield"><div class="clabel">First Name</div><input id="co-fname" type="text" placeholder="First name"></div>
+          <div class="cfield"><div class="clabel">Last Name</div><input id="co-lname" type="text" placeholder="Last name"></div>
         </div>
-        <div class="cfield"><div class="clabel">Email</div><input id="co-email" type="email" placeholder="arjun@email.com"></div>
-        <div class="cfield"><div class="clabel">Phone</div><input id="co-phone" type="tel" placeholder="+353 or +91 ..."></div>
-        <div class="cfield"><div class="clabel">Address</div><input id="co-addr" type="text" placeholder="Street address"></div>
+        <div class="cfield"><div class="clabel">Email</div><input id="co-email" type="email" placeholder="your@email.com"></div>
+        <div class="cfield"><div class="clabel">Phone</div><input id="co-phone" type="tel" placeholder="+1 234 567 8900"></div>
+        <div class="cfield"><div class="clabel">Address</div><input id="co-addr" type="text" placeholder="Street address, apartment, suite..."></div>
         <div class="cfield-row">
-          <div class="cfield"><div class="clabel">City</div><input id="co-city" type="text" placeholder="Dublin"></div>
-          <div class="cfield"><div class="clabel">Postcode</div><input id="co-post" type="text" placeholder="D01 XXXX"></div>
+          <div class="cfield"><div class="clabel">City</div><input id="co-city" type="text" placeholder="City"></div>
+          <div class="cfield"><div class="clabel">Postcode</div><input id="co-post" type="text" placeholder="Postal / ZIP code"></div>
         </div>
         <div class="cfield-row">
-          <div class="cfield"><div class="clabel">State / Province</div><input id="co-state" type="text" placeholder="Madhya Pradesh"></div>
+          <div class="cfield"><div class="clabel">State / Province</div><input id="co-state" type="text" placeholder="State or province"></div>
           <div class="cfield"><div class="clabel">Country</div>
             <select id="co-country">
               <option value="">Select country</option>
@@ -3009,6 +3058,36 @@ function renderProductDetails(p) {
     <div class="pd-actions">
       <button class="btn-add" onclick="addToCart('${p.id}')">Add to Cart →</button>
     </div>
+    <div class="pd-pillars">
+      <div class="pd-pillar">
+        <div class="pd-pillar-icon">🐇</div>
+        <div class="pd-pillar-text">
+          <div class="pd-pillar-title">Cruelty Free</div>
+          <div class="pd-pillar-sub">Never tested on animals</div>
+        </div>
+      </div>
+      <div class="pd-pillar">
+        <div class="pd-pillar-icon">🌿</div>
+        <div class="pd-pillar-text">
+          <div class="pd-pillar-title">Finest Ingredients</div>
+          <div class="pd-pillar-sub">Sourced from the world's finest origins</div>
+        </div>
+      </div>
+      <div class="pd-pillar">
+        <div class="pd-pillar-icon">✦</div>
+        <div class="pd-pillar-text">
+          <div class="pd-pillar-title">Quiet Elegance</div>
+          <div class="pd-pillar-sub">A scent that accompanies the day with quiet elegance</div>
+        </div>
+      </div>
+      <div class="pd-pillar">
+        <div class="pd-pillar-icon">🇫🇷</div>
+        <div class="pd-pillar-text">
+          <div class="pd-pillar-title">Designed in France</div>
+          <div class="pd-pillar-sub">Crafted in the tradition of French perfumery</div>
+        </div>
+      </div>
+    </div>
 `;
   // Render reviews after DOM is ready
   // Inject full-width reviews and reco sections outside product-wrap
@@ -3106,7 +3185,6 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 // ── FEATURED ───────────────────────────────────────────
 function renderFeatured(){
   const allProducts=products.filter(p=>p.status==='live');
-  // Use featured product from API if set, otherwise first product
   const featId = window._featuredProductId;
   const p = (featId && allProducts.find(x=>x.id===featId)) || allProducts[0];
   if(!p) return;
@@ -4365,7 +4443,7 @@ function toggleTheme(){
   const current = document.documentElement.getAttribute('data-theme');
   const next = current === 'light' ? 'dark' : 'light';
   applyTheme(next);
-  try { localStorage.setItem(THEME_KEY, next); } catch(e) {}
+  // Not saving to localStorage — time-based theme resets on page load
   // Re-render 3D scenes for new theme
   setTimeout(() => {
     if(document.getElementById('home').classList.contains('active')) initHero3D();
